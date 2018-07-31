@@ -125,7 +125,7 @@ def evaluation(match_number = 1 + 1 + 2 ):
         else:
             print("wrong")
             wrong += 1
-            a = input("input something to continue")
+            #a = input("input something to continue")
     print(right, wrong)
 
 def predict(predict_index=63):# which game to predict index>32 and index <64, 63 for the final match:
