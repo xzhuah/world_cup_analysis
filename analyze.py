@@ -105,7 +105,7 @@ def train(data,alpha=0.5,training_time=50):
         team_ability = new_team_ability  # update
     return team_ability
 
-def evaluation(match_number = 1 + 1 + 2 + 4):
+def evaluation(match_number = 1 + 1 + 2 ):
     data_file = "world2018score.csv"
     data, teams = load_data(data_file)
 
@@ -128,21 +128,23 @@ def evaluation(match_number = 1 + 1 + 2 + 4):
             a = input("input something to continue")
     print(right, wrong)
 
-
-if __name__ == "__main__":
+def predict(predict_index=63):# which game to predict index>32 and index <64, 63 for the final match:
     data_file = "world2018score.csv"
     data, teams = load_data(data_file)
 
-    predict_index = 63 # which game to predict >32 <64
 
-    team_ability = train(data.loc[:,0:predict_index-1],alpha=0.5,training_time=50)
-    a,b = predict_score(team_ability[data[predict_index]["team1"]],team_ability[data[predict_index]["team2"]])
 
-    print(data[predict_index]["point1"],data[predict_index]["point2"])
-    if (a>b) == (data[predict_index]["point1"]>data[predict_index]["point2"]):
+    team_ability = train(data.loc[:, 0:predict_index - 1], alpha=0.5, training_time=50)
+    a, b = predict_score(team_ability[data[predict_index]["team1"]], team_ability[data[predict_index]["team2"]])
+
+    print(data[predict_index]["point1"], data[predict_index]["point2"])
+    if (a > b) == (data[predict_index]["point1"] > data[predict_index]["point2"]):
         print("right")
     else:
         print("wrong")
 
 
+if __name__ == "__main__":
+    #evaluation()
+    predict(63)
 
